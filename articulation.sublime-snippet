@@ -1,0 +1,30 @@
+<snippet>
+	<content><![CDATA[
+vector <pii> a[N];                                          //give  edge along with node
+ll vis[N],dfs_num[N],dfs_low[N],dfs_parent[N];
+ll dfsNumberCounter,rootChildren;
+vi bridge;
+ll dfsRoot;                                                 // set dfs root 
+void articulationPointAndBridge(int u) {
+    dfs_low[u] = dfs_num[u] = dfsNumberCounter++;             // dfs_low[u] <= dfs_num[u]
+    for (auto i:a[node]) {
+        if (dfs_num[i.first] == 0 ) {                         // a tree edge
+            dfs_parent[i.first] = u;
+            if (u == dfsRoot) rootChildren++;                // special case if u is a root
+                articulationPointAndBridge(i.first);
+            if (dfs_low[i.F] >= dfs_num[u])                 // for articulation point
+                articulation_vertex[u] = 1;                 // store this information first
+            if (dfs_low[i.F] > dfs_num[u])                     // for bridge
+                bridge.pb(i.S);                                 //bridge store indices of all bridges
+            dfs_low[u] = min(dfs_low[u], dfs_low[i.F]);     // update dfs_low[u]
+        }
+        else if (i.F != dfs_parent[u])                         // a back edge and not direct cycle
+            dfs_low[u] = min(dfs_low[u], dfs_num[i.F]);     // update dfs_low[u]
+    } 
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>articulationPointAndBridge</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

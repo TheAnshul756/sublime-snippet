@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+/*Don't Try, Can't Hack*/
+/*Tumse Na Ho Paega*/
+/*Fuck Off*/
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fuck</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c,source.c++</scope>
+</snippet>

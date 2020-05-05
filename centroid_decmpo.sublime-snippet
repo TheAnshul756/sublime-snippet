@@ -1,0 +1,45 @@
+<snippet>
+	<content><![CDATA[
+set<ll> a[N];
+ll par[N],total_subtree_size,subtree_size[N];
+void dfs1(ll node,ll p)
+{
+	total_subtree_size++;
+	subtree_size[node]=1;
+	for(auto i:a[node])
+	{
+		if(i!=p)
+		{
+			dfs1(i,node);
+			subtree_size[node]+=subtree_size[i];
+		}
+	}
+}
+ll dfs2(ll node,ll p)
+{
+	for(auto i:a[node])
+	{
+		if(i!=p && subtree_size[i]>total_subtree_size/2)
+			return dfs2(i,node);
+	}
+	return node;
+}
+void decompose(ll node,ll p)
+{
+	total_subtree_size=0;
+	dfs1(node,-1);
+	ll centroid = dfs2(node,p);
+	par[centroid]=p;
+	for(auto i:a[centroid])
+	{
+		a[i].erase(centroid);
+		decompose(i,centroid);
+	}
+	a[centroid].clear();
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>centroid decomposition</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

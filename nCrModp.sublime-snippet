@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[
+ll nCrModp(ll n, ll r, ll p)
+{
+    ll C[r+1];
+    memset(C, 0, sizeof(C));
+ 	C[0] = 1;
+ 	for (ll i = 1; i <= n; i++)
+    {
+        for (ll j = min(i, r); j > 0; j--)
+ 		C[j] = (C[j] + C[j-1])%p;
+    }
+    return C[r];
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>nCrModp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c,source.c++</scope>
+</snippet>
